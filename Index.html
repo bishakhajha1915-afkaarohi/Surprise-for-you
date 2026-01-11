@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Just a second…</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+      padding: 40px;
+    }
+    .box {
+      background: rgba(0,0,0,0.6);
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 350px;
+      margin: auto;
+    }
+    .bar {
+      width: 100%;
+      background: #333;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+    .fill {
+      height: 20px;
+      width: 0%;
+      background: lime;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      background: #00ffcc;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2 id="text">Tap to continue</h2>
+  <div class="bar">
+    <div class="fill" id="fill"></div>
+  </div>
+  <button onclick="startPrank()">Start</button>
+</div>
+
+<audio id="sound">
+  <source src="https://www.soundjay.com/button/sounds/button-10.mp3">
+</audio>
+
+<script>
+  function startPrank() {
+    document.getElementById("sound").play();
+
+    let messages = [
+      "Connecting to Instagram…",
+      "Checking profile…",
+      "Scanning data…",
+      "Verifying account…",
+      "Finalizing…"
+    ];
+
+    let i = 0;
+    let percent = 0;
+    let text = document.getElementById("text");
+    let fill = document.getElementById("fill");
+
+    let interval = setInterval(() => {
+      if (i < messages.length) {
+        text.innerText = messages[i];
+        percent += 20;
+        fill.style.width = percent + "%";
+        i++;
+      } else {
+        clearInterval(interval);
+        text.innerHTML = "😂😂 YOU GOT PRANKED 😂😂<br><br>Share this again 😜";
+        fill.style.width = "100%";
+      }
+    }, 1500);
+  }
+</script>
+
+</body>
+</html>
